@@ -1,0 +1,129 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  text-decoration: none;
+  color: #070606;
+  scroll-behavior: smooth;
+}
+
+textarea {
+  resize: none;
+}
+
+nav {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+}
+nav section {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-left: 10%;
+}
+nav section #logolafg {
+  width: 50px;
+}
+nav .navLinks {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-right: 10%;
+}
+
+button {
+  padding: 4px 16px;
+  background-color: #fefefe;
+  border: 2px solid #070606;
+  border-radius: 10px;
+  box-shadow: 3px 3px #f4aa25;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.3s;
+  cursor: pointer;
+}
+button:hover {
+  transform: translateY(4%);
+}
+
+@keyframes mltShdSpin {
+  0% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  5%, 95% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+  10%, 59% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+  }
+  20% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em, -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, -0.749em -0.34em 0 -0.477em;
+  }
+  38% {
+    box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em, -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, -0.82em -0.09em 0 -0.477em;
+  }
+  100% {
+    box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+  }
+}
+@keyframes round {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loaderContainer {
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 2;
+}
+.loaderContainer .loader {
+  color: #f4aa25;
+  font-size: 45px;
+  text-indent: -9999em;
+  overflow: hidden;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  position: relative;
+  transform: translateZ(0);
+  animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+}
+
+.dashboard {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding: 5% 0 0 5%;
+  gap: 10%;
+}
+.dashboard .buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.dashboard section h1 {
+  padding-bottom: 24px;
+}
+.dashboard section form input, .dashboard section form textarea {
+  max-width: 100%;
+  min-width: 400px;
+  padding: 10px;
+  margin-bottom: 8px;
+}
+.dashboard section form textarea {
+  height: 400px;
+}/*# sourceMappingURL=index.css.map */
