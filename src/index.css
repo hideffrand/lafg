@@ -43,13 +43,35 @@ button {
   border: 2px solid #070606;
   border-radius: 10px;
   box-shadow: 3px 3px #f4aa25;
-  font-size: 14px;
   font-weight: bold;
+  font-size: 14px;
   transition: 0.3s;
   cursor: pointer;
 }
 button:hover {
   transform: translateY(4%);
+}
+
+#delBtn {
+  color: red;
+  border: 2px solid red;
+  box-shadow: none;
+}
+#delBtn:hover {
+  transform: none;
+  background-color: red;
+  color: white;
+}
+
+#editBtn {
+  color: green;
+  border: 2px solid green;
+  box-shadow: none;
+}
+#editBtn:hover {
+  transform: none;
+  background-color: green;
+  color: white;
 }
 
 @keyframes mltShdSpin {
@@ -103,27 +125,128 @@ button:hover {
   animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
 }
 
+@keyframes popup {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.popup {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  animation: popup 0.3s ease-in;
+}
+.popup .container {
+  border-radius: 4px;
+  width: 200px;
+  height: 50px;
+  background-color: #fefefe;
+  border: 1px solid red;
+}
+.popup .container section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.popup .container .icon {
+  width: 50px;
+  height: 50px;
+  background-color: green;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+.popup .container .icon #icons {
+  font-weight: bold;
+  font-size: 24px;
+  color: white;
+}
+
+.dashboardNavbar {
+  background-color: #fefefe;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 8vh;
+}
+.dashboardNavbar section {
+  padding: 0 5%;
+}
+.dashboardNavbar section button {
+  margin: 0 8px;
+}
+
 .dashboard {
   width: 100%;
-  height: auto;
-  display: flex;
-  padding: 5% 0 0 5%;
-  gap: 10%;
+  min-height: 100vh;
+  max-height: auto;
 }
-.dashboard .buttons {
+.dashboard .container {
+  padding: 10vh 5%;
+}
+.dashboard .container .homeSection {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dashboard .container .homeSection img {
+  width: 20%;
+}
+.dashboard .container section {
+  width: 100%;
+  display: flex;
+  gap: 24px;
+}
+.dashboard .container section .dataSection {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: end;
 }
-.dashboard section h1 {
-  padding-bottom: 24px;
+.dashboard .container section .dataSection table {
+  margin-top: 8px;
+  width: 100%;
 }
-.dashboard section form input, .dashboard section form textarea {
-  max-width: 100%;
-  min-width: 400px;
-  padding: 10px;
+.dashboard .container section .dataSection table td, .dashboard .container section .dataSection table th {
+  padding: 4px;
+}
+.dashboard .container section .dataSection table td {
+  border: 1px solid rgb(228, 228, 228);
+}
+.dashboard .container section .dataSection table #tdActions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.dashboard .container section .dataSection table th {
+  background-color: #ebd493;
+  text-align: left;
+}
+.dashboard .container section form {
+  width: 50%;
+}
+.dashboard .container section form input, .dashboard .container section form textarea {
+  width: 100%;
+  padding: 8px;
   margin-bottom: 8px;
 }
-.dashboard section form textarea {
+.dashboard .container section form label {
+  padding-bottom: 12px;
+}
+.dashboard .container section form textarea {
   height: 400px;
 }/*# sourceMappingURL=index.css.map */

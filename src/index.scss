@@ -49,8 +49,8 @@ button {
     border: 2px solid $black;
     border-radius: 10px;
     box-shadow: 3px 3px $yellow;
-    font-size: 14px;
     font-weight: bold;
+    font-size: 14px;
     transition: 0.3s;
     cursor: pointer;
     &:hover {
@@ -58,7 +58,28 @@ button {
     }
 }
 
-  
+#delBtn {
+    color: red;
+    border: 2px solid red;
+    box-shadow: none;
+    &:hover {
+        transform: none;
+        background-color: red;
+        color: white;
+    }
+}
+
+#editBtn {
+    color: green;
+    border: 2px solid green;
+    box-shadow: none;
+    &:hover {
+        transform: none;
+        background-color: green;
+        color: white;
+    }
+}
+
 @keyframes mltShdSpin {
     0% {
       box-shadow: 0 -0.83em 0 -0.4em,
@@ -121,32 +142,127 @@ button {
     }
 }
 
-.dashboard {
+@keyframes popup {
+    0% {transform: scale(0);}
+    100% {transform: scale(1);}
+}
+
+.popup {
     width: 100%;
-    height: auto;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
     display: flex;
-    padding: 5% 0 0 5%;
-    gap: 10%;
-    .buttons {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-    section {
-        h1 {
-            padding-bottom: 24px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    animation: popup 0.3s ease-in;
+    .container {
+        border-radius: 4px;
+        width: 200px;
+        height: 50px;
+        background-color: $white;
+        border: 1px solid red;
+        section {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
         }
-        form {
-            input, textarea {
-                max-width: 100%;
-                min-width: 400px;
-                padding: 10px;
-                margin-bottom: 8px;
-            }
-            textarea {
-                height: 400px;
+        .icon {
+            width: 50px;
+            height: 50px;
+            background-color: green;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            #icons {
+                font-weight: bold;
+                font-size: 24px;
+                color: white;
             }
         }
     }
 }
+
+.dashboardNavbar {
+    background-color: $white;
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 8vh;
+    section {
+        padding: 0 5%;
+        button {
+            margin: 0 8px;
+        }
+    }
+}
+
+.dashboard {
+    width: 100%;
+    min-height: 100vh;
+    max-height: auto;
+    .container {
+        padding: 10vh 5%;
+        .homeSection {
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            img {
+                width: 20%;
+            }
+        }
+        section {
+            width: 100%;
+            display: flex;
+            gap: 24px;
+            .dataSection {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: end;
+                table {
+                    margin-top: 8px;
+                    width: 100%;
+                    td, th {
+                        padding: 4px;
+                    }
+                    td {
+                        border: 1px solid rgb(228, 228, 228);
+                    }
+                    #tdActions {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 8px;
+                    }
+                    th {
+                        background-color: $sand;
+                        text-align: left;
+                    }
+                }
+            }
+            form {
+                width: 50%;
+                input, textarea {
+                    width: 100%;
+                    padding: 8px;
+                    margin-bottom: 8px;
+                }
+                label {
+                    padding-bottom: 12px;
+                }
+                textarea {
+                    height: 400px;
+                }
+            }
+        }
+    }
+}
+
 

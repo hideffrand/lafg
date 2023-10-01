@@ -1,127 +1,221 @@
 import "/src/index.css";
-import { useRef, useState } from "react";
-import { collection, doc, setDoc, getDocs } from "firebase/firestore";
+import { useEffect, useRef, useState } from "react";
+import { collection, doc, setDoc, getDocs, onSnapshot, deleteDoc } from "firebase/firestore";
 import { db } from "/src/config/firebase.js";
 import Loader from "../components/Loader";
-import Popup from "../components/Popup";
+import admin from '../assets/admin.png'
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+    const navigate = useNavigate()
+    const formRef = useRef()
     const [loading, setLoading] = useState(false)
-    const [showPopUp, setShowPopUp] = useState(false)
-    const [author, setAuthor] = useState("");
-    const [content, setContent] = useState("");
-    const [date, setDate] = useState("");
-    const [title, setTitle] = useState("");
-    const [verse, setVerse] = useState("");
+    const [showPopup, setShowPopup] = useState(false)
+    const [propPopup, setPropPopup] = useState('')
     const [changeSection, setChangeSection] = useState('')
-    const formRef = useRef();
+    const [formTitle, setFormTitle] = useState('Add new Renungan')
+    const [showForm, setShowForm] = useState(false)
+
+    const [author, setAuthor] = useState('')
+    const [content, setContent] = useState('')
+    const [postDate, setPostDate] = useState('')
+    const [editDate, setEditDate] = useState('')
+    const [title, setTitle] = useState('')
+    const [updateId, setUpdateId] = useState(null)
+    const [verse, setVerse] = useState('')
 
     async function handleSubmitRenungan(e) {
         e.preventDefault();
         try {
             setLoading(true)
-            const uniqueId = author.slice(0, 1) + date.slice(0, 4) + verse.slice(0, 3);
-            const docRef = doc(db, "renungan", uniqueId);
+            const uniqueId = author.slice(0, 1) + postDate.slice(0, 4) + verse.slice(0, 3);
+            const docRef = doc(db, "renungan", (updateId ? updateId : uniqueId));
             await setDoc(docRef, {
                 author: author,
                 content: content,
-                posted_at: date,
-                updated_at: null,
+                postedAt: postDate,
+                updatedAt: editDate ? editDate : null,
                 title: title,
                 verse: verse,
             });
             setLoading(false)
-            alert("Document added succesfully!!");
+            handlePopup('Data added succesfully!')
+            getRenungan()
             formRef.current.reset();
+            setTitle('')
+            setPostDate('')
+            setAuthor('')
+            setVerse('')
+            setContent('')
+            setUpdateId('')
+            setFormTitle('Add new renungan')
         } catch (error) {
-        console.error("Error adding document: ", error);
+            console.error("Error adding document: ", error);
         }
     }
     
-    const [name, setName] = useState('')
-    const [alias, setAlias] = useState('')
-    const [birthDate, setBirthDate] = useState('')
-    const [email, setEmail] = useState('')
+    const [listRenungan, setListRenungan] = useState([])
 
-    async function handleSubmitPemuda(e) {
-        e.preventDefault();
+    async function getRenungan() {
+        let listData = [];
+        const querySnapshot = await getDocs(collection(db, "renungan"));
+        querySnapshot.forEach((doc) => {
+            listData.push({
+                docId: doc.id,
+                data: doc.data()
+            })
+        });
+        setListRenungan(listData)
+    }
+
+    async function delRenungan(id) {
         try {
             setLoading(true)
-            const uniqueId = name.slice(0, 1) + birthDate.slice(0, 4);
-            const docRef = doc(db, "members", uniqueId);
-            await setDoc(docRef, {
-                name: name,
-                alias: alias,
-                birth_date: birthDate,
-                email: email,
-            });
+            await deleteDoc(doc(db, "renungan", id))
             setLoading(false)
-            alert("Document added succesfully!!");
-            formRef.current.reset();
+            handlePopup('Data Deleted')
+            getRenungan()
         } catch (error) {
-        console.error("Error adding document: ", error);
+            console.log("Error Deleting:", error)
         }
     }
 
-//   async function getRenungan() {
-//     let listRenungan = [];
-//     const querySnapshot = await getDocs(collection(db, "renungan"));
-//     querySnapshot.forEach((doc) => {
-//       console.log(doc.data());
-//       listRenungan.push(doc.data());
-//       console.log(listRenungan);
-//     });
-//   }
+    function handleEditRenungan(props) {
+        setFormTitle(`Edit Renungan ${props.id}`)
+        setUpdateId(props.id)
+        setTitle(props.pushTitle)
+        setAuthor(props.pushAuthor)
+        setPostDate(props.pushPostedAt)
+        setEditDate(new Date())
+        setVerse(props.pushVerse)
+        setContent(props.pushContent)
+    }
+
+    const ListRenungan = () => {
+        return (
+            <>
+                <table cellSpacing={0}>
+                    <tr>
+                        <th></th>
+                        <th>Title</th>
+                        <th>Date Posted</th>
+                        <th>Author</th>
+                        <th></th> 
+                        <th id="tdActions">Actions</th>
+                    </tr>
+                    {listRenungan.map((renungan, i) => (
+                        <tr key={i}>
+                            {/* <td>{i + 1}</td> */}
+                            <td>{renungan.docId }</td>
+                            <td>{renungan.data.title}</td>
+                            <td>{renungan.data.postedAt}</td>
+                            <td>{renungan.data.author}</td>
+                            <td id="content">link to page</td>
+                            <td id="tdActions">
+                                <button id="editBtn" onClick={() => handleEditRenungan({
+                                    id: renungan.docId,
+                                    pushTitle: renungan.data.title,
+                                    pushPostedAt: renungan.data.postedAt,
+                                    pushAuthor: renungan.data.author,
+                                    pushVerse: renungan.data.verse,
+                                    pushContent: renungan.data.content,
+                                })}>Edit</button>
+                                <button id="delBtn" onClick={() => delRenungan(renungan.docId)}>Delete</button>
+                            </td>
+                        </tr>
+                    ))}
+                </table>
+            </>
+        )
+    }
+
+    const Popup = () => {
+        return (
+            <>
+                <div className="popup" style={{ display: showPopup ? 'flex' : 'none' }}>
+                    <div className="container">
+                        <section>
+                            <span></span>
+                            <div className="icon">
+                                <ion-icon id="icons" name="checkmark-outline"></ion-icon>
+                            </div>
+                            <p onClick={() => setShowPopup(false)}>x</p>
+                        </section>
+                        <h1>{ propPopup }</h1>
+                    </div>
+                </div>
+            </>
+        )
+    }
+
+    function handlePopup(text) {
+        const propText = text
+        setPropPopup(propText)
+        setShowPopup(true)
+        setTimeout(() => {
+            setShowPopup(false)
+        }, 1000);
+    }
+
+    useEffect(() => {
+        getRenungan()
+    }, [])
 
     return (
         <>
             {loading && <Loader />}
-            <div className="dashboard">
+            <Popup />
+            <div className="dashboardNavbar">
                 <section>
                     <h1>Hey, Admin!</h1>
-                    <div className="buttons">
-                        <button onClick={() => setChangeSection('')}>Home</button>
-                        <button onClick={() => setChangeSection('addRenungan')}>Renungan</button>
-                        <button onClick={() => setChangeSection('addMember')}>Pemuda</button>
-                    </div>
                 </section>
                 <section>
-                    {changeSection == 'addRenungan' &&
-                        <>
-                            <h1>Add new article</h1>
-                            <form ref={formRef} action="" onSubmit={handleSubmitRenungan}>
-                                <label htmlFor="title">Judul:</label><br />
-                                <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} /> <br />
-                                <label htmlFor="date">Tanggal</label><br />
-                                <input id="date" type="date" onChange={(e) => setDate(e.target.value)} /> <br />
-                                <label htmlFor="author">Penulis:</label><br />
-                                <input id="author" type="text" onChange={(e) => setAuthor(e.target.value)} /> <br />
-                                <label htmlFor="verse">Ayat:</label><br />
-                                <input id="verse" type="text" onChange={(e) => setVerse(e.target.value)} /> <br />
-                                <label htmlFor="content">Content: </label><br />
-                                <textarea id="content" type="text" onChange={(e) => setContent(e.target.value)} /><br />
-                                <button type="submit">submit</button>
-                            </form>
-                        </>
-                    }
-                    {changeSection == 'addMember' && 
-                        <>
-                            <h1>Add new member</h1>
-                            <form ref={formRef} action="">
-                                <label htmlFor="name">Nama: </label><br />
-                                <input id="name" type="text" onChange={(e) => setName(e.target.value)} /> <br />
-                                <label htmlFor="email">Email</label><br />
-                                <input id="email" type="text" onChange={(e) => setEmail(e.target.value)} /> <br />
-                                <label htmlFor="alias">Alias: </label><br />
-                                <input id="name" type="text" onChange={(e) => setAlias(e.target.value)} /> <br />
-                                <label htmlFor="birthDate">Tanggal lahir:</label><br />
-                                <input id="birthDate" type="date" onChange={(e) => setBirthDate(e.target.value)} /> <br />
-                                <button type="submit" onClick={handleSubmitPemuda}>submit</button>
-                            </form>
-                        </>
-                        
-                    }
+                    <button onClick={() => setChangeSection('')}>Home</button>
+                    <button onClick={() => setChangeSection('addRenungan')}>Renungan</button>
+                    <button onClick={() => handlePopup()}>test</button>
+                    <button onClick={() => navigate('/')}>Exit</button>
                 </section>
+            </div>
+            <div className="dashboard">
+                <div className="container">
+                    {changeSection == '' &&
+                        <div className="homeSection">
+                            <img src={admin} alt="" />
+                        </div>
+                    }
+                    {changeSection == 'addRenungan' &&
+                        <section>
+                            <div className="dataSection">
+                                <button onClick={() => setShowForm(!showForm)}>
+                                    {showForm ? <p>Cancel</p> : <p>Add new</p>}
+                                </button>
+                                <ListRenungan />
+                            </div>
+                            {showForm && 
+                                <form ref={formRef} action="" onSubmit={handleSubmitRenungan}>
+                                    <h3>{formTitle}</h3>
+                                    <label htmlFor="title">Judul:</label><br />
+                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title}/> <br />
+                                    <label htmlFor="date">Tanggal</label><br />
+                                    <input id="date" type="date" onChange={(e) => setPostDate(e.target.value)} value={postDate}/> <br />
+                                    <label htmlFor="author">Penulis:</label><br />
+                                    <input id="author" type="text" onChange={(e) => setAuthor(e.target.value)} value={author} /> <br />
+                                    <span style={{display: 'flex', gap: '24px'}}>
+                                        <p onClick={() => setAuthor('Pdt. I Ketut Miasa.S.th.M.Div.')}>+ Pdt. Miasa</p>
+                                        <p onClick={() => setAuthor('Pdt. Klemens Hendrik Dubulie.S.th.M.Div.')}>+ Pdt. Klemens</p>
+                                        <p onClick={() => setAuthor('')}>+ Others</p>
+                                    </span>
+                                    <br />
+                                    <label htmlFor="verse">Ayat:</label><br />
+                                    <input id="verse" type="text" onChange={(e) => setVerse(e.target.value)} value={verse}/> <br />
+                                    <label htmlFor="content">Content: </label><br />
+                                    <textarea id="content" type="text" onChange={(e) => setContent(e.target.value)} value={content}/><br />
+                                    <button type="submit" id="submitBtn">Publish</button>
+                                </form>
+                            }
+                        </section>
+                    }
+                </div>
             </div>
       </>
   )
