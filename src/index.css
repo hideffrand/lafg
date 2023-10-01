@@ -202,8 +202,15 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
-.dashboard .container .homeSection img {
-  width: 20%;
+.dashboard .container .homeSection .image {
+  width: 50%;
+}
+.dashboard .container .homeSection .image img {
+  width: 50%;
+}
+.dashboard .container .homeSection .todo {
+  border: 1px solid red;
+  width: 50%;
 }
 .dashboard .container section {
   width: 100%;
@@ -249,4 +256,23 @@ button:hover {
 }
 .dashboard .container section form textarea {
   height: 400px;
+}
+
+.login {
+  width: 100%;
+  height: auto;
+  display: flex;
+  padding-top: 10vh;
+  justify-content: center;
+}
+.login form {
+  display: flex;
+  flex-direction: column;
+}
+.login form input {
+  padding: 8px;
+  margin-bottom: 8px;
+}
+.login form button {
+  margin-top: 8px;
 }/*# sourceMappingURL=index.css.map */

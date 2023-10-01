@@ -213,8 +213,15 @@ button {
             display: flex;
             align-items: center;
             justify-content: center;
-            img {
-                width: 20%;
+            .image {
+                width: 50%;
+                img {
+                    width: 50%;
+                }
+            }
+            .todo {
+                border: 1px solid red;
+                width: 50%;
             }
         }
         section {
@@ -265,4 +272,21 @@ button {
     }
 }
 
-
+.login {
+    width: 100%;
+    height: auto;
+    display: flex;
+    padding-top: 10vh;
+    justify-content: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        input {
+            padding: 8px;
+            margin-bottom: 8px;
+        }
+        button {
+            margin-top: 8px;
+        }
+    }
+}

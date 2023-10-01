@@ -129,6 +129,14 @@ export default function Dashboard() {
         )
     }
 
+    const Todo = () => {
+        return (
+            <>
+                <p>ngentot</p>
+            </>
+        )
+    }
+
     const Popup = () => {
         return (
             <>
@@ -157,8 +165,14 @@ export default function Dashboard() {
         }, 1000);
     }
 
+    function handleExit() {
+        localStorage.clear()
+        navigate('/')
+    }
+
     useEffect(() => {
         getRenungan()
+        console.log('token', localStorage.getItem('user-token'))
     }, [])
 
     return (
@@ -173,14 +187,21 @@ export default function Dashboard() {
                     <button onClick={() => setChangeSection('')}>Home</button>
                     <button onClick={() => setChangeSection('addRenungan')}>Renungan</button>
                     <button onClick={() => handlePopup()}>test</button>
-                    <button onClick={() => navigate('/')}>Exit</button>
+                    <button onClick={() => handleExit()}>Exit</button>
                 </section>
             </div>
             <div className="dashboard">
                 <div className="container">
                     {changeSection == '' &&
                         <div className="homeSection">
-                            <img src={admin} alt="" />
+                            <div className="image">
+                                <img src={admin} alt="" />
+                                <p>Nothing to do now, have a great weekend!</p>
+                            </div>
+                            <div className="todo">
+                                <h1>To-do: </h1>
+                                <Todo />
+                            </div>
                         </div>
                     }
                     {changeSection == 'addRenungan' &&
