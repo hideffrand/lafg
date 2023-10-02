@@ -18,12 +18,13 @@ export default function Login() {
     
     return (
         <div className="login">
+            <h1>Login</h1>
             <form action="" >
                 <label htmlFor="username">Username: </label>
                 <input type="text" id="username" onChange={(e) => setUsername(e.target.value)}/>
                 <label htmlFor="password">Password: </label>
                 <input type="password" id="password" onChange={(e) => setPassword(e.target.value)}/>
-                <button onClick={() => handleSubmit()}>Login</button>
+                <button className="primaryButton" onClick={() => handleSubmit()}>Login</button>
             </form>
         </div>
     )

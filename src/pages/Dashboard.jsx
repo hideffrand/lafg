@@ -168,8 +168,8 @@ export default function Dashboard() {
                                     pushAuthor: renungan.data.author,
                                     pushVerse: renungan.data.verse,
                                     pushContent: renungan.data.content,
-                                })}>Edit</button>
-                                <button id="delBtn" onClick={() => delRenungan(renungan.docId)}>Delete</button>
+                                })}><ion-icon name="create-outline"></ion-icon>Edit</button>
+                                <button id="delBtn" onClick={() => delRenungan(renungan.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon>Delete</button>
                             </td>
                         </tr>
                     ))}
@@ -185,7 +185,7 @@ export default function Dashboard() {
                     <div className="noteContainer" key={i}>
                         <p>{i + 1}. {item.data.note}</p>
                         <span>
-                            <button onClick={() => delTodo(item.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon></button>
+                            <button className="primaryButton" onClick={() => delTodo(item.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon></button>
                         </span>
                     </div>
                 ))}
@@ -240,10 +240,10 @@ export default function Dashboard() {
                     <h1>Hey, Admin!</h1>
                 </section>
                 <section>
-                    <button onClick={() => setChangeSection('')}>Home</button>
-                    <button onClick={() => setChangeSection('addJadwal')}>Jadwal</button>
-                    <button onClick={() => setChangeSection('addRenungan')}>Renungan</button>
-                    <button onClick={() => handleExit()}>Exit</button>
+                    <button className="primaryButton" onClick={() => setChangeSection('')}>Home</button>
+                    <button className="primaryButton" onClick={() => setChangeSection('addJadwal')}>Jadwal</button>
+                    <button className="primaryButton" onClick={() => setChangeSection('addRenungan')}>Renungan</button>
+                    <button className="primaryButton" onClick={() => handleExit()}>Exit</button>
                 </section>
             </div>
             <div className="dashboard">
@@ -257,7 +257,7 @@ export default function Dashboard() {
                                 <h1>To-do list </h1>
                                 <form ref={formRef} action="" onSubmit={handleSubmitTodo}>
                                     <input type="text" onChange={(e) => setNote(e.target.value)} value={note} placeholder="Add new note..."/>
-                                    <button type="submit">+</button>
+                                    <button className="primaryButton" type="submit">+</button>
                                 </form>
                                 <Todo />
                             </div>
@@ -271,7 +271,7 @@ export default function Dashboard() {
                     {changeSection == 'addRenungan' &&
                         <section>
                             <div className="dataSection">
-                                <button onClick={() => setShowForm(!showForm)}>
+                                <button className="primaryButton" onClick={() => setShowForm(!showForm)}>
                                     {showForm ? <p>Cancel</p> : <p>Add new</p>}
                                 </button>
                                 <ListRenungan />
@@ -296,7 +296,7 @@ export default function Dashboard() {
                                     <input id="verse" type="text" onChange={(e) => setVerse(e.target.value)} value={verse}/> <br />
                                     <label htmlFor="content">Content: </label><br />
                                     <textarea id="content" type="text" onChange={(e) => setContent(e.target.value)} value={content}/><br />
-                                    <button type="submit" id="submitBtn">Publish</button>
+                                    <button className="primaryButton" type="submit" id="submitBtn">Publish</button>
                                 </form>
                             }
                         </section>

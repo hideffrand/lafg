@@ -50,9 +50,12 @@ export default function DetailRenungan() {
                     <p>Penulis: {details.author} ({details.postedAt})</p>
                     {/* <p>{details.postedAt}</p> */}
                     <span>
-                        <button onClick={() => history.back()}>Kembali</button>
+                        <span></span>
                         <div className="buttons">
-                            <a href=""><ion-icon name="heart-outline"></ion-icon></a>
+                            <button><ion-icon name="heart-outline"></ion-icon></button>
+                            <div className="shareContainer">
+                                <button></button>
+                            </div>
                         </div>
                     </span>
                 </div>

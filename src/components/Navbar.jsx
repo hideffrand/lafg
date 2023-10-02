@@ -6,16 +6,14 @@ export default function Navbar() {
     const navigate = useNavigate()
     return (
         <nav>
-            <section>
+            <section onClick={() => navigate('/')}>
                 <img src={logoLafg} alt="LA(F)-G" id='logolafg' />
-                <p>La(F)-G</p>
+                <h1>La(F)-G</h1>
             </section>
             <div className="navLinks">
-                <a href="">Jadwal</a>
                 <a href="#news">News</a>
                 <a href="">Gallery</a>
                 <a href="" onClick={() => navigate("/renungan")}>Renungan</a>
-                <a href="">Info</a>
             </div>
         </nav>
     )

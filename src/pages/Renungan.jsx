@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { collection, getDocs } from 'firebase/firestore';
+import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../config/firebase'
 import '../index.css'
-import { Link, useNavigate } from 'react-router-dom';
 
 export default function Renungan() {
     const navigate = useNavigate()
@@ -24,6 +24,7 @@ export default function Renungan() {
     useEffect(() => {
         getRenungan()
     }, [])
+
     return (
         <div className="renungan">
             {listRenungan?.map((item, i) => (
