@@ -26,6 +26,7 @@ nav {
     align-items: center;
     justify-content: space-between;
     padding: 10px;
+    background: linear-gradient(to bottom, $white, transparent);
     section {
         display: flex;
         align-items: center;
@@ -187,6 +188,7 @@ button {
 
 .dashboardNavbar {
     background-color: $white;
+    border: 1px solid $grey;
     position: fixed;
     display: flex;
     align-items: center;
@@ -194,6 +196,9 @@ button {
     width: 100%;
     height: 8vh;
     section {
+        @media only screen and (max-width: 678px) {
+            display: none;
+        }
         padding: 0 5%;
         button {
             margin: 0 8px;
@@ -213,21 +218,67 @@ button {
             display: flex;
             align-items: center;
             justify-content: center;
+            @media only screen and (max-width: 678px) {
+                flex-direction: column;
+            }
             .image {
+                @media only screen and (max-width: 678px) {
+                    width: 100%;
+                }
                 width: 50%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
                 img {
+                    @media only screen and (max-width: 678px) {
+                        width: 70%;
+                    }
                     width: 50%;
                 }
             }
             .todo {
-                border: 1px solid red;
+                @media only screen and (max-width: 678px) {
+                    width: 100%;
+                }
                 width: 50%;
+                form {
+                    width: 80%;
+                    margin-bottom: 12px;
+                    display: flex;
+                    input {
+                        width: 100%;
+                        padding: 8px;
+                        margin-right: 12px;
+                    }
+                }
+                .noteContainer {
+                    width: 80%;
+                    display: flex;
+                    justify-content: space-between;
+                    border-bottom: 1px solid $sand;
+                    padding-bottom: 4px;
+                    margin-bottom: 8px;
+                    button {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        border: none;
+                        box-shadow: none;
+                    }
+                    #icon {
+                        font-size: 22px;
+                    }
+                }
             }
         }
         section {
             width: 100%;
             display: flex;
             gap: 24px;
+            @media only screen and (max-width: 678px) {
+                flex-direction: column;
+            }
             .dataSection {
                 width: 100%;
                 display: flex;
@@ -288,5 +339,51 @@ button {
         button {
             margin-top: 8px;
         }
+    }
+}
+
+.detailRenungan {
+    width: 100%;
+    min-height: 100vh;
+    max-height: auto;
+    .container {
+        padding: 5% 10%;
+        h1, #verse {
+            text-align: center;
+        }
+        #content {
+            white-space: pre-line;
+            text-align: justify;
+        }
+        span {
+            margin: 12px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}
+
+footer {
+    width: 100%;
+    height: 10vh;
+    background-color: $sand;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 10%;
+        span {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            img {
+                border-radius: 50%;
+                width: 3%;
+            }
+        }
+
     }
 }

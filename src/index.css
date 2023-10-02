@@ -20,6 +20,7 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  background: linear-gradient(to bottom, #fefefe, transparent);
 }
 nav section {
   display: flex;
@@ -173,6 +174,7 @@ button:hover {
 
 .dashboardNavbar {
   background-color: #fefefe;
+  border: 1px solid #7d7d7d;
   position: fixed;
   display: flex;
   align-items: center;
@@ -182,6 +184,11 @@ button:hover {
 }
 .dashboardNavbar section {
   padding: 0 5%;
+}
+@media only screen and (max-width: 678px) {
+  .dashboardNavbar section {
+    display: none;
+  }
 }
 .dashboardNavbar section button {
   margin: 0 8px;
@@ -202,20 +209,76 @@ button:hover {
   align-items: center;
   justify-content: center;
 }
+@media only screen and (max-width: 678px) {
+  .dashboard .container .homeSection {
+    flex-direction: column;
+  }
+}
 .dashboard .container .homeSection .image {
   width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+@media only screen and (max-width: 678px) {
+  .dashboard .container .homeSection .image {
+    width: 100%;
+  }
 }
 .dashboard .container .homeSection .image img {
   width: 50%;
 }
+@media only screen and (max-width: 678px) {
+  .dashboard .container .homeSection .image img {
+    width: 70%;
+  }
+}
 .dashboard .container .homeSection .todo {
-  border: 1px solid red;
   width: 50%;
+}
+@media only screen and (max-width: 678px) {
+  .dashboard .container .homeSection .todo {
+    width: 100%;
+  }
+}
+.dashboard .container .homeSection .todo form {
+  width: 80%;
+  margin-bottom: 12px;
+  display: flex;
+}
+.dashboard .container .homeSection .todo form input {
+  width: 100%;
+  padding: 8px;
+  margin-right: 12px;
+}
+.dashboard .container .homeSection .todo .noteContainer {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ebd493;
+  padding-bottom: 4px;
+  margin-bottom: 8px;
+}
+.dashboard .container .homeSection .todo .noteContainer button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  box-shadow: none;
+}
+.dashboard .container .homeSection .todo .noteContainer #icon {
+  font-size: 22px;
 }
 .dashboard .container section {
   width: 100%;
   display: flex;
   gap: 24px;
+}
+@media only screen and (max-width: 678px) {
+  .dashboard .container section {
+    flex-direction: column;
+  }
 }
 .dashboard .container section .dataSection {
   width: 100%;
@@ -275,4 +338,49 @@ button:hover {
 }
 .login form button {
   margin-top: 8px;
+}
+
+.detailRenungan {
+  width: 100%;
+  min-height: 100vh;
+  max-height: auto;
+}
+.detailRenungan .container {
+  padding: 5% 10%;
+}
+.detailRenungan .container h1, .detailRenungan .container #verse {
+  text-align: center;
+}
+.detailRenungan .container #content {
+  white-space: pre-line;
+  text-align: justify;
+}
+.detailRenungan .container span {
+  margin: 12px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+footer {
+  width: 100%;
+  height: 10vh;
+  background-color: #ebd493;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+footer .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10%;
+}
+footer .container span {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+footer .container span img {
+  border-radius: 50%;
+  width: 3%;
 }/*# sourceMappingURL=index.css.map */

@@ -1,5 +1,6 @@
 import '../index.css'
-import { useEffect, useState } from "react"
+import { v4 as uuid } from 'uuid'
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 export default function Login() {
@@ -9,15 +10,12 @@ export default function Login() {
 
     function handleSubmit() {
         if (username == import.meta.env.VITE_REACT_USERNAME && password == import.meta.env.VITE_REACT_PASSWORD) {
-            localStorage.setItem('user-token', 'asdfghjkl')
-            console.log('token', localStorage.getItem('user-token'))
+            let newToken = uuid()
+            localStorage.setItem('token', newToken)
             navigate('/dashboard')
         }
     }
     
-    useEffect(() => {
-        console.log('token', localStorage.getItem('cobatoken'))
-    }, [])
     return (
         <div className="login">
             <form action="" >

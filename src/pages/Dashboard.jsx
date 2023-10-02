@@ -1,12 +1,15 @@
 import "/src/index.css";
+import { v4 as uuid } from 'uuid';
 import { useEffect, useRef, useState } from "react";
-import { collection, doc, setDoc, getDocs, onSnapshot, deleteDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
 import { db } from "/src/config/firebase.js";
 import Loader from "../components/Loader";
 import admin from '../assets/admin.png'
 import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
+    const dbRenungan = import.meta.env.VITE_REACT_RENUNGAN_DBNAME
+    const dbTodos = import.meta.env.VITE_REACT_TODO_DBNAME
     const navigate = useNavigate()
     const formRef = useRef()
     const [loading, setLoading] = useState(false)
@@ -16,6 +19,7 @@ export default function Dashboard() {
     const [formTitle, setFormTitle] = useState('Add new Renungan')
     const [showForm, setShowForm] = useState(false)
 
+    const [listRenungan, setListRenungan] = useState([])
     const [author, setAuthor] = useState('')
     const [content, setContent] = useState('')
     const [postDate, setPostDate] = useState('')
@@ -24,12 +28,15 @@ export default function Dashboard() {
     const [updateId, setUpdateId] = useState(null)
     const [verse, setVerse] = useState('')
 
+    const [todoList, setTodoList] = useState([])
+    const [note, setNote] = useState('')
+
     async function handleSubmitRenungan(e) {
         e.preventDefault();
         try {
             setLoading(true)
-            const uniqueId = author.slice(0, 1) + postDate.slice(0, 4) + verse.slice(0, 3);
-            const docRef = doc(db, "renungan", (updateId ? updateId : uniqueId));
+            const uniqueId = uuid()
+            const docRef = doc(db, dbRenungan, (updateId ? updateId : uniqueId))
             await setDoc(docRef, {
                 author: author,
                 content: content,
@@ -54,11 +61,10 @@ export default function Dashboard() {
         }
     }
     
-    const [listRenungan, setListRenungan] = useState([])
 
     async function getRenungan() {
         let listData = [];
-        const querySnapshot = await getDocs(collection(db, "renungan"));
+        const querySnapshot = await getDocs(collection(db, dbRenungan));
         querySnapshot.forEach((doc) => {
             listData.push({
                 docId: doc.id,
@@ -71,7 +77,7 @@ export default function Dashboard() {
     async function delRenungan(id) {
         try {
             setLoading(true)
-            await deleteDoc(doc(db, "renungan", id))
+            await deleteDoc(doc(db, dbRenungan, id))
             setLoading(false)
             handlePopup('Data Deleted')
             getRenungan()
@@ -91,6 +97,48 @@ export default function Dashboard() {
         setContent(props.pushContent)
     }
 
+    async function handleSubmitTodo(e) {
+        e.preventDefault();
+        try {
+            setLoading(true)
+            const uniqueId = uuid()
+            const docRef = doc(db, dbTodos, uniqueId);
+            await setDoc(docRef, {
+                note: note,
+            });
+            setLoading(false)
+            handlePopup('Data added succesfully!')
+            setNote('')
+            getTodos()
+        } catch (error) {
+            console.error("Error adding document: ", error);
+        }
+    } 
+
+    async function delTodo(id) {
+        try {
+            setLoading(true)
+            await deleteDoc(doc(db, dbTodos, id))
+            setLoading(false)
+            handlePopup('Data Deleted')
+            getTodos()
+        } catch (error) {
+            console.log("Error Deleting:", error)
+        }
+    }
+
+    async function getTodos() {
+        let listData = [];
+        const querySnapshot = await getDocs(collection(db, dbTodos));
+        querySnapshot.forEach((doc) => {
+            listData.push({
+                docId: doc.id,
+                data: doc.data()
+            })
+        });
+        setTodoList(listData)
+    }
+
     const ListRenungan = () => {
         return (
             <>
@@ -100,17 +148,18 @@ export default function Dashboard() {
                         <th>Title</th>
                         <th>Date Posted</th>
                         <th>Author</th>
-                        <th></th> 
+                        <th>Content</th>
+                        {/* <th></th>  */}
                         <th id="tdActions">Actions</th>
                     </tr>
                     {listRenungan.map((renungan, i) => (
                         <tr key={i}>
-                            {/* <td>{i + 1}</td> */}
-                            <td>{renungan.docId }</td>
+                            <td>{i + 1}</td>
                             <td>{renungan.data.title}</td>
                             <td>{renungan.data.postedAt}</td>
                             <td>{renungan.data.author}</td>
-                            <td id="content">link to page</td>
+                            <td>{renungan.data.content.slice(0,10)}...</td>
+                            {/* <td id="content">link to page</td> */}
                             <td id="tdActions">
                                 <button id="editBtn" onClick={() => handleEditRenungan({
                                     id: renungan.docId,
@@ -132,7 +181,14 @@ export default function Dashboard() {
     const Todo = () => {
         return (
             <>
-                <p>ngentot</p>
+                {todoList?.map((item, i) => (
+                    <div className="noteContainer" key={i}>
+                        <p>{i + 1}. {item.data.note}</p>
+                        <span>
+                            <button onClick={() => delTodo(item.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon></button>
+                        </span>
+                    </div>
+                ))}
             </>
         )
     }
@@ -172,7 +228,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         getRenungan()
-        console.log('token', localStorage.getItem('user-token'))
+        getTodos()
     }, [])
 
     return (
@@ -185,8 +241,8 @@ export default function Dashboard() {
                 </section>
                 <section>
                     <button onClick={() => setChangeSection('')}>Home</button>
+                    <button onClick={() => setChangeSection('addJadwal')}>Jadwal</button>
                     <button onClick={() => setChangeSection('addRenungan')}>Renungan</button>
-                    <button onClick={() => handlePopup()}>test</button>
                     <button onClick={() => handleExit()}>Exit</button>
                 </section>
             </div>
@@ -196,13 +252,21 @@ export default function Dashboard() {
                         <div className="homeSection">
                             <div className="image">
                                 <img src={admin} alt="" />
-                                <p>Nothing to do now, have a great weekend!</p>
                             </div>
                             <div className="todo">
-                                <h1>To-do: </h1>
+                                <h1>To-do list </h1>
+                                <form ref={formRef} action="" onSubmit={handleSubmitTodo}>
+                                    <input type="text" onChange={(e) => setNote(e.target.value)} value={note} placeholder="Add new note..."/>
+                                    <button type="submit">+</button>
+                                </form>
                                 <Todo />
                             </div>
                         </div>
+                    }
+                    {changeSection == 'addJadwal' && 
+                        <section>
+
+                        </section>
                     }
                     {changeSection == 'addRenungan' &&
                         <section>
@@ -216,7 +280,8 @@ export default function Dashboard() {
                                 <form ref={formRef} action="" onSubmit={handleSubmitRenungan}>
                                     <h3>{formTitle}</h3>
                                     <label htmlFor="title">Judul:</label><br />
-                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title}/> <br />
+                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} /> <br />
+                                    <p onClick={() => setTitle('Lentera Jiwa')}>+ Lentera Jiwa</p><br />
                                     <label htmlFor="date">Tanggal</label><br />
                                     <input id="date" type="date" onChange={(e) => setPostDate(e.target.value)} value={postDate}/> <br />
                                     <label htmlFor="author">Penulis:</label><br />
