@@ -68,21 +68,24 @@ button {
 
 nav {
     width: 100%;
+    height: 12vh;
     position: fixed;
     z-index: 1;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(to bottom, $white, transparent);
-    padding: 22px;
-    section {
-        padding-left: 10%;
-        display: flex;
-        align-items: center;
-        gap: 24px;
-        img {
-            border-radius: 50%;
-            width: 4%;
+    transition: 0.3s ease-in;
+    img {
+        margin-left: 10%;
+        border-radius: 50%;
+        width: 3.2%;
+    }
+    .hamburger {
+        padding-right: 10%;
+        display: none;
+        #icon {
+            font-size: 36px;
+            color: $white;
         }
     }
     .navLinks {
@@ -93,13 +96,85 @@ nav {
     }
 }
 
+@keyframes sidebar {
+    0% {
+        // transform: translateY(-11vh);
+        opacity: 0;
+    }
+    100% {
+        // transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+.sidebar {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    transform: translateY(12vh);
+    display: flex;
+    justify-content: end;
+    .container {
+        animation: sidebar 0.3s ease-in;
+        width: 100%;
+        height: 8vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        background-color: $white;
+    }
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(-20%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .homepage {
     width: 100%;
     height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    // background-color: pink;
+    background-image: 
+    linear-gradient(to left, rgb(31, 31, 31, 0.5), transparent), 
+    linear-gradient(to right, rgb(31, 31, 31, 0.5), transparent), 
+    url('/src/assets/homepage1.jpg')
+    ;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        animation: slideLeft 1.2s ease-out;
+        h1 {
+            width: 60%;
+            font-size: 60px;
+        }
+        h1, p {
+            text-align: center;
+            color: $white;
+            // background-color: $white;
+            margin-bottom: 4px;
+            span {
+                color: $white;
+                text-decoration: underline;
+                text-decoration-color: $yellow;
+            }
+        }
+    }
 }
 
 
@@ -214,13 +289,11 @@ nav {
     position: fixed;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
     height: 8vh;
+    z-index: 1;
     section {
-        @media only screen and (max-width: 678px) {
-            display: none;
-        }
         display: flex;
         padding: 0 5%;
         button {
@@ -237,36 +310,12 @@ nav {
         padding: 10vh 5%;
         .homeSection {
             width: 100%;
-            height: 80vh;
+            height: auto;
             display: flex;
-            align-items: center;
             justify-content: center;
-            @media only screen and (max-width: 678px) {
-                flex-direction: column;
-            }
-            .image {
-                @media only screen and (max-width: 678px) {
-                    width: 100%;
-                }
-                width: 50%;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-                img {
-                    @media only screen and (max-width: 678px) {
-                        width: 70%;
-                    }
-                    width: 50%;
-                }
-            }
             .todo {
-                @media only screen and (max-width: 678px) {
-                    width: 100%;
-                }
                 width: 50%;
                 form {
-                    width: 80%;
                     margin-bottom: 12px;
                     display: flex;
                     input {
@@ -276,7 +325,6 @@ nav {
                     }
                 }
                 .noteContainer {
-                    width: 80%;
                     display: flex;
                     justify-content: space-between;
                     border-bottom: 1px solid $sand;
@@ -299,9 +347,6 @@ nav {
             width: 100%;
             display: flex;
             gap: 24px;
-            @media only screen and (max-width: 678px) {
-                flex-direction: column;
-            }
             .dataSection {
                 width: 100%;
                 display: flex;
@@ -329,17 +374,22 @@ nav {
                 }
             }
             form {
+                display: flex;
+                flex-direction: column;
                 width: 50%;
                 input, textarea {
                     width: 100%;
-                    padding: 8px;
+                    padding: 2px 4px;
                     margin-bottom: 8px;
                 }
                 label {
-                    padding-bottom: 12px;
+                    padding-bottom: 4px;
                 }
                 textarea {
                     height: 400px;
+                }
+                #submitBtn {
+                    width: 20%;
                 }
             }
         }
@@ -423,4 +473,102 @@ footer {
     justify-content: center;
     flex-direction: column;
     gap: 10vh;
+}
+
+@media only screen and (max-width: 678px) {
+
+    nav {
+        img {
+            width: 10%;
+        }
+        .hamburger {
+            display: block;
+        }
+        .navLinks {
+            display: none;
+        }
+    }
+
+    .homepage {
+        .container {
+            h1 {
+                width: 90%;
+                font-size: 30px;
+            }
+        }
+    }
+
+    .detailRenungan {
+        padding-top: 8vh;
+        .container {
+            padding: 5% 4%;
+        }
+    }
+
+    .dashboardNavbar {
+        section {
+            button {
+                padding: 4px 8px;
+            }
+        }
+    }
+
+    .dashboard {
+        .container {
+            .homeSection {
+                flex-direction: column;
+                .image {
+                    width: 100%;
+                    img {
+                        width: 70%;
+                    }
+                }
+                .todo {
+                    width: 100%;
+                    h1 {
+                        font-size: 20px;
+                    }
+                    .noteContainer {
+                        p {
+                            font-size: 14px;
+                        }
+                    }
+                }
+            }
+            section {
+                flex-direction: column;
+                .dataSection {
+                    table {
+                        .title, .author, .content, {
+                            display: none;
+                        }
+                    }
+                }
+                form {
+                    padding-top: 10vh;
+                    width: 100%;
+                    transform: translateX(-4px);
+                    input, textarea {
+                        width: 100%;
+                        padding: 2px 4px;
+                    }
+                    label {
+                        padding-bottom: 2px;
+                    }
+                    #submitBtn {
+                        width: 100%;
+                    }
+                }
+            }
+        }   
+    }
+    
+    footer {
+        .container {
+            p {
+                font-size: 12px;
+                width: 50%;
+            }
+        }
+    }
 }

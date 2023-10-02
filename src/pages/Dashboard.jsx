@@ -145,21 +145,21 @@ export default function Dashboard() {
                 <table cellSpacing={0}>
                     <tr>
                         <th></th>
-                        <th>Title</th>
-                        <th>Date Posted</th>
-                        <th>Author</th>
-                        <th>Content</th>
-                        {/* <th></th>  */}
+                        <th className="title">Title</th>
+                        <th className="date">Date Posted</th>
+                        <th className="author">Author</th>
+                        <th className="content">Content</th>
+                        <th></th> 
                         <th id="tdActions">Actions</th>
                     </tr>
                     {listRenungan.map((renungan, i) => (
                         <tr key={i}>
                             <td>{i + 1}</td>
-                            <td>{renungan.data.title}</td>
-                            <td>{renungan.data.postedAt}</td>
-                            <td>{renungan.data.author}</td>
-                            <td>{renungan.data.content.slice(0,10)}...</td>
-                            {/* <td id="content">link to page</td> */}
+                            <td className="title">{renungan.data.title}</td>
+                            <td className="date">{renungan.data.postedAt}</td>
+                            <td className="author">{renungan.data.author}</td>
+                            <td className="content">{renungan.data.content.slice(0,10)}...</td>
+                            <td><p onClick={() => navigate(`/renungan/${renungan.docId}`)}>Visit</p></td>
                             <td id="tdActions">
                                 <button id="editBtn" onClick={() => handleEditRenungan({
                                     id: renungan.docId,
@@ -237,9 +237,6 @@ export default function Dashboard() {
             <Popup />
             <div className="dashboardNavbar">
                 <section>
-                    <h1>Hey, Admin!</h1>
-                </section>
-                <section>
                     <button className="primaryButton" onClick={() => setChangeSection('')}>Home</button>
                     <button className="primaryButton" onClick={() => setChangeSection('addJadwal')}>Jadwal</button>
                     <button className="primaryButton" onClick={() => setChangeSection('addRenungan')}>Renungan</button>
@@ -250,11 +247,9 @@ export default function Dashboard() {
                 <div className="container">
                     {changeSection == '' &&
                         <div className="homeSection">
-                            <div className="image">
-                                <img src={admin} alt="" />
-                            </div>
                             <div className="todo">
-                                <h1>To-do list </h1>
+                                <p>Kalau lupa mau ngapain, tulis disini aja</p>
+                                <br />
                                 <form ref={formRef} action="" onSubmit={handleSubmitTodo}>
                                     <input type="text" onChange={(e) => setNote(e.target.value)} value={note} placeholder="Add new note..."/>
                                     <button className="primaryButton" type="submit">+</button>
@@ -271,31 +266,24 @@ export default function Dashboard() {
                     {changeSection == 'addRenungan' &&
                         <section>
                             <div className="dataSection">
-                                <button className="primaryButton" onClick={() => setShowForm(!showForm)}>
+                                <a className="primaryButton" href="#formRenungan" onClick={() => setShowForm(!showForm)}>
                                     {showForm ? <p>Cancel</p> : <p>Add new</p>}
-                                </button>
+                                </a>
                                 <ListRenungan />
                             </div>
                             {showForm && 
-                                <form ref={formRef} action="" onSubmit={handleSubmitRenungan}>
+                                <form ref={formRef} action="" onSubmit={handleSubmitRenungan} id="formRenungan">
                                     <h3>{formTitle}</h3>
-                                    <label htmlFor="title">Judul:</label><br />
-                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} /> <br />
-                                    <p onClick={() => setTitle('Lentera Jiwa')}>+ Lentera Jiwa</p><br />
-                                    <label htmlFor="date">Tanggal</label><br />
-                                    <input id="date" type="date" onChange={(e) => setPostDate(e.target.value)} value={postDate}/> <br />
-                                    <label htmlFor="author">Penulis:</label><br />
-                                    <input id="author" type="text" onChange={(e) => setAuthor(e.target.value)} value={author} /> <br />
-                                    <span style={{display: 'flex', gap: '24px'}}>
-                                        <p onClick={() => setAuthor('Pdt. I Ketut Miasa.S.th.M.Div.')}>+ Pdt. Miasa</p>
-                                        <p onClick={() => setAuthor('Pdt. Klemens Hendrik Dubulie.S.th.M.Div.')}>+ Pdt. Klemens</p>
-                                        <p onClick={() => setAuthor('')}>+ Others</p>
-                                    </span>
-                                    <br />
-                                    <label htmlFor="verse">Ayat:</label><br />
-                                    <input id="verse" type="text" onChange={(e) => setVerse(e.target.value)} value={verse}/> <br />
-                                    <label htmlFor="content">Content: </label><br />
-                                    <textarea id="content" type="text" onChange={(e) => setContent(e.target.value)} value={content}/><br />
+                                    <label htmlFor="title">Judul:</label>
+                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} /> 
+                                    <label htmlFor="date">Tanggal:</label>
+                                    <input id="date" type="date" onChange={(e) => setPostDate(e.target.value)} value={postDate}/> 
+                                    <label htmlFor="author">Penulis:</label>
+                                    <input id="author" type="text" onChange={(e) => setAuthor(e.target.value)} value={author} /> 
+                                    <label htmlFor="verse">Ayat:</label>
+                                    <input id="verse" type="text" onChange={(e) => setVerse(e.target.value)} value={verse}/> 
+                                    <label htmlFor="content">Content: </label>
+                                    <textarea id="content" type="text" onChange={(e) => setContent(e.target.value)} value={content}/>
                                     <button className="primaryButton" type="submit" id="submitBtn">Publish</button>
                                 </form>
                             }

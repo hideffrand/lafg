@@ -1,20 +1,27 @@
 import '../index.css'
 import logoLafg from '../assets/logolafg.jpg'
 import { useNavigate } from 'react-router-dom'
+import { useState } from 'react'
+import Sidebar from './Sidebar'
 
 export default function Navbar() {
     const navigate = useNavigate()
+    const [showSidebar, setShowSidebar] = useState(false)
+
     return (
-        <nav>
-            <section onClick={() => navigate('/')}>
-                <img src={logoLafg} alt="LA(F)-G" id='logolafg' />
-                <h1>La(F)-G</h1>
-            </section>
-            <div className="navLinks">
-                <a href="#news">News</a>
-                <a href="">Gallery</a>
-                <a href="" onClick={() => navigate("/renungan")}>Renungan</a>
-            </div>
-        </nav>
+        <>
+            {showSidebar && <Sidebar />}
+            <nav style={{backgroundColor: showSidebar ? 'white' : 'transparent'}}>
+                <img src={logoLafg} alt="LA(F)-G" id='logolafg' onClick={() => navigate('/')}/>
+                <div className="hamburger" onClick={() => setShowSidebar(!showSidebar)}>
+                    <ion-icon id="icon" name={showSidebar ? 'close-outline' : 'menu-outline'} style={{color: showSidebar ? 'black' : 'white'}}></ion-icon>
+                </div>
+                <div className="navLinks">
+                    <button className='primaryButton' onClick={() => navigate("/#news")}>News</button>
+                    <button className='primaryButton' onClick={() => navigate("/")}>Gallery</button>
+                    <button className='primaryButton' onClick={() => navigate("/renungan")}>Renungan</button>
+                </div>
+            </nav>
+        </>
     )
 }

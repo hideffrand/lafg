@@ -47,8 +47,8 @@ export default function DetailRenungan() {
                     <br />
                     <p id='content'>{details.content}</p>
                     <br />
-                    <p>Penulis: {details.author} ({details.postedAt})</p>
-                    {/* <p>{details.postedAt}</p> */}
+                    <p>{details.author}</p>
+                    <p>{details.postedAt}</p>
                     <span>
                         <span></span>
                         <div className="buttons">

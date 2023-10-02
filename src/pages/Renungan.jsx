@@ -3,6 +3,7 @@ import { collection, getDocs } from 'firebase/firestore';
 import { Link, useNavigate } from 'react-router-dom';
 import { db } from '../config/firebase'
 import '../index.css'
+import Navbar from '../components/Navbar';
 
 export default function Renungan() {
     const navigate = useNavigate()
@@ -26,13 +27,16 @@ export default function Renungan() {
     }, [])
 
     return (
-        <div className="renungan">
-            {listRenungan?.map((item, i) => (
-                <div className="" key={i}>
-                    <p onClick={() => navigate(`/renungan/${item.docId}`)}>{item.data.postedAt}</p>
-                    
-                </div>
-            ))}
-        </div>
+        <>
+            <Navbar />
+            <div className="renungan">
+                {listRenungan?.map((item, i) => (
+                    <div className="" key={i}>
+                        <p onClick={() => navigate(`/renungan/${item.docId}`)}>{item.data.postedAt}</p>
+                        
+                    </div>
+                ))}
+            </div>
+        </>
     )
 }

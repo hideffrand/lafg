@@ -62,23 +62,26 @@ button {
 
 nav {
   width: 100%;
+  height: 12vh;
   position: fixed;
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(to bottom, #fefefe, transparent);
-  padding: 22px;
+  transition: 0.3s ease-in;
 }
-nav section {
-  padding-left: 10%;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-}
-nav section img {
+nav img {
+  margin-left: 10%;
   border-radius: 50%;
-  width: 4%;
+  width: 3.2%;
+}
+nav .hamburger {
+  padding-right: 10%;
+  display: none;
+}
+nav .hamburger #icon {
+  font-size: 36px;
+  color: #fefefe;
 }
 nav .navLinks {
   display: flex;
@@ -87,12 +90,75 @@ nav .navLinks {
   padding-right: 10%;
 }
 
+@keyframes sidebar {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.sidebar {
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+  transform: translateY(12vh);
+  display: flex;
+  justify-content: end;
+}
+.sidebar .container {
+  animation: sidebar 0.3s ease-in;
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  background-color: #fefefe;
+}
+
+@keyframes slideLeft {
+  0% {
+    transform: translateX(-20%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 .homepage {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-image: linear-gradient(to left, rgba(31, 31, 31, 0.5), transparent), linear-gradient(to right, rgba(31, 31, 31, 0.5), transparent), url("/src/assets/homepage1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.homepage .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  animation: slideLeft 1.2s ease-out;
+}
+.homepage .container h1 {
+  width: 60%;
+  font-size: 60px;
+}
+.homepage .container h1, .homepage .container p {
+  text-align: center;
+  color: #fefefe;
+  margin-bottom: 4px;
+}
+.homepage .container h1 span, .homepage .container p span {
+  color: #fefefe;
+  text-decoration: underline;
+  text-decoration-color: #f4aa25;
 }
 
 @keyframes mltShdSpin {
@@ -198,18 +264,14 @@ nav .navLinks {
   position: fixed;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   width: 100%;
   height: 8vh;
+  z-index: 1;
 }
 .dashboardNavbar section {
   display: flex;
   padding: 0 5%;
-}
-@media only screen and (max-width: 678px) {
-  .dashboardNavbar section {
-    display: none;
-  }
 }
 .dashboardNavbar section button {
   margin: 0 8px;
@@ -225,46 +287,14 @@ nav .navLinks {
 }
 .dashboard .container .homeSection {
   width: 100%;
-  height: 80vh;
+  height: auto;
   display: flex;
-  align-items: center;
   justify-content: center;
-}
-@media only screen and (max-width: 678px) {
-  .dashboard .container .homeSection {
-    flex-direction: column;
-  }
-}
-.dashboard .container .homeSection .image {
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-@media only screen and (max-width: 678px) {
-  .dashboard .container .homeSection .image {
-    width: 100%;
-  }
-}
-.dashboard .container .homeSection .image img {
-  width: 50%;
-}
-@media only screen and (max-width: 678px) {
-  .dashboard .container .homeSection .image img {
-    width: 70%;
-  }
 }
 .dashboard .container .homeSection .todo {
   width: 50%;
 }
-@media only screen and (max-width: 678px) {
-  .dashboard .container .homeSection .todo {
-    width: 100%;
-  }
-}
 .dashboard .container .homeSection .todo form {
-  width: 80%;
   margin-bottom: 12px;
   display: flex;
 }
@@ -274,7 +304,6 @@ nav .navLinks {
   margin-right: 12px;
 }
 .dashboard .container .homeSection .todo .noteContainer {
-  width: 80%;
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #ebd493;
@@ -295,11 +324,6 @@ nav .navLinks {
   width: 100%;
   display: flex;
   gap: 24px;
-}
-@media only screen and (max-width: 678px) {
-  .dashboard .container section {
-    flex-direction: column;
-  }
 }
 .dashboard .container section .dataSection {
   width: 100%;
@@ -328,18 +352,23 @@ nav .navLinks {
   text-align: left;
 }
 .dashboard .container section form {
+  display: flex;
+  flex-direction: column;
   width: 50%;
 }
 .dashboard .container section form input, .dashboard .container section form textarea {
   width: 100%;
-  padding: 8px;
+  padding: 2px 4px;
   margin-bottom: 8px;
 }
 .dashboard .container section form label {
-  padding-bottom: 12px;
+  padding-bottom: 4px;
 }
 .dashboard .container section form textarea {
   height: 400px;
+}
+.dashboard .container section form #submitBtn {
+  width: 20%;
 }
 
 .login {
@@ -417,4 +446,72 @@ footer .container span a {
   justify-content: center;
   flex-direction: column;
   gap: 10vh;
+}
+
+@media only screen and (max-width: 678px) {
+  nav img {
+    width: 10%;
+  }
+  nav .hamburger {
+    display: block;
+  }
+  nav .navLinks {
+    display: none;
+  }
+  .homepage .container h1 {
+    width: 90%;
+    font-size: 30px;
+  }
+  .detailRenungan {
+    padding-top: 8vh;
+  }
+  .detailRenungan .container {
+    padding: 5% 4%;
+  }
+  .dashboardNavbar section button {
+    padding: 4px 8px;
+  }
+  .dashboard .container .homeSection {
+    flex-direction: column;
+  }
+  .dashboard .container .homeSection .image {
+    width: 100%;
+  }
+  .dashboard .container .homeSection .image img {
+    width: 70%;
+  }
+  .dashboard .container .homeSection .todo {
+    width: 100%;
+  }
+  .dashboard .container .homeSection .todo h1 {
+    font-size: 20px;
+  }
+  .dashboard .container .homeSection .todo .noteContainer p {
+    font-size: 14px;
+  }
+  .dashboard .container section {
+    flex-direction: column;
+  }
+  .dashboard .container section .dataSection table .title, .dashboard .container section .dataSection table .author, .dashboard .container section .dataSection table .content {
+    display: none;
+  }
+  .dashboard .container section form {
+    padding-top: 10vh;
+    width: 100%;
+    transform: translateX(-4px);
+  }
+  .dashboard .container section form input, .dashboard .container section form textarea {
+    width: 100%;
+    padding: 2px 4px;
+  }
+  .dashboard .container section form label {
+    padding-bottom: 2px;
+  }
+  .dashboard .container section form #submitBtn {
+    width: 100%;
+  }
+  footer .container p {
+    font-size: 12px;
+    width: 50%;
+  }
 }/*# sourceMappingURL=index.css.map */
