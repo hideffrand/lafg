@@ -2,10 +2,9 @@ import "/src/index.css";
 import { v4 as uuid } from 'uuid';
 import { useEffect, useRef, useState } from "react";
 import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 import { db } from "/src/config/firebase.js";
 import Loader from "../components/Loader";
-import admin from '../assets/admin.png'
-import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
     const dbRenungan = import.meta.env.VITE_REACT_RENUNGAN_DBNAME
@@ -25,6 +24,7 @@ export default function Dashboard() {
     const [postDate, setPostDate] = useState('')
     const [editDate, setEditDate] = useState('')
     const [title, setTitle] = useState('')
+    const [series, setSeries] = useState('')
     const [updateId, setUpdateId] = useState(null)
     const [verse, setVerse] = useState('')
 
@@ -43,6 +43,7 @@ export default function Dashboard() {
                 postedAt: postDate,
                 updatedAt: editDate ? editDate : null,
                 title: title,
+                series: series,
                 verse: verse,
             });
             setLoading(false)
@@ -55,6 +56,7 @@ export default function Dashboard() {
             setVerse('')
             setContent('')
             setUpdateId('')
+            setSeries('')
             setFormTitle('Add new renungan')
         } catch (error) {
             console.error("Error adding document: ", error);
@@ -95,6 +97,7 @@ export default function Dashboard() {
         setEditDate(new Date())
         setVerse(props.pushVerse)
         setContent(props.pushContent)
+        setSeries(props.pushSeries)
     }
 
     async function handleSubmitTodo(e) {
@@ -146,29 +149,35 @@ export default function Dashboard() {
                     <tr>
                         <th></th>
                         <th className="title">Title</th>
+                        <th className="series">Series</th> 
                         <th className="date">Date Posted</th>
                         <th className="author">Author</th>
-                        <th className="content">Content</th>
-                        <th></th> 
+                        <th className="verse">Verse</th>
+                        <th></th>
                         <th id="tdActions">Actions</th>
                     </tr>
                     {listRenungan.map((renungan, i) => (
                         <tr key={i}>
                             <td>{i + 1}</td>
                             <td className="title">{renungan.data.title}</td>
+                            <td className="series">{renungan.data.series}</td>
                             <td className="date">{renungan.data.postedAt}</td>
                             <td className="author">{renungan.data.author}</td>
-                            <td className="content">{renungan.data.content.slice(0,10)}...</td>
-                            <td><p onClick={() => navigate(`/renungan/${renungan.docId}`)}>Visit</p></td>
+                            <td className="verse">{renungan.data.verse}</td>
+                            <td className="goToPage"><a href={`/renungan/${renungan.docId}`}>Visit</a></td>
                             <td id="tdActions">
-                                <button id="editBtn" onClick={() => handleEditRenungan({
-                                    id: renungan.docId,
-                                    pushTitle: renungan.data.title,
-                                    pushPostedAt: renungan.data.postedAt,
-                                    pushAuthor: renungan.data.author,
-                                    pushVerse: renungan.data.verse,
-                                    pushContent: renungan.data.content,
-                                })}><ion-icon name="create-outline"></ion-icon>Edit</button>
+                                <button id="editBtn" onClick={() => {
+                                    setShowForm(!showForm)
+                                    handleEditRenungan({
+                                        id: renungan.docId,
+                                        pushTitle: renungan.data.title,
+                                        pushSeries: renungan.data.series,
+                                        pushPostedAt: renungan.data.postedAt,
+                                        pushAuthor: renungan.data.author,
+                                        pushVerse: renungan.data.verse,
+                                        pushContent: renungan.data.content,
+                                    })
+                                }}><ion-icon name="create-outline"></ion-icon>Edit</button>
                                 <button id="delBtn" onClick={() => delRenungan(renungan.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon>Delete</button>
                             </td>
                         </tr>
@@ -275,7 +284,14 @@ export default function Dashboard() {
                                 <form ref={formRef} action="" onSubmit={handleSubmitRenungan} id="formRenungan">
                                     <h3>{formTitle}</h3>
                                     <label htmlFor="title">Judul:</label>
-                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} /> 
+                                    <input id="title" type="text" onChange={(e) => setTitle(e.target.value)} value={title} />
+                                    <p onClick={() => {
+                                        setTitle('Manna Surgawi')
+                                        setSeries('Manna Surgawi')
+                                        setAuthor('Pdt. I Ketut Miasa.M.Div.')
+                                    }}>+</p>
+                                    <label htmlFor="series">Series:</label>
+                                    <input id="title" type="text" onChange={(e) => setSeries(e.target.value)} value={series} /> 
                                     <label htmlFor="date">Tanggal:</label>
                                     <input id="date" type="date" onChange={(e) => setPostDate(e.target.value)} value={postDate}/> 
                                     <label htmlFor="author">Penulis:</label>

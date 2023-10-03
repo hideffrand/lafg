@@ -47,8 +47,8 @@ button {
     text-decoration: underline;
     &:hover {
         transform: none;
-        background-color: red;
-        color: white;
+        color: red;
+        font-weight: bold;
     }
     #icon {
         font-size: 20px;
@@ -77,7 +77,7 @@ nav {
     transition: 0.3s ease-in;
     img {
         margin-left: 10%;
-        border-radius: 50%;
+        border-radius: 10px;
         width: 3.2%;
     }
     .hamburger {
@@ -139,6 +139,11 @@ nav {
     }
 }
 
+@keyframes slideUp {
+    0% {transform: translateY(10%); opacity: 0;}
+    100% {transform: translateY(0); opacity: 1;}
+}
+
 .homepage {
     width: 100%;
     height: 100vh;
@@ -148,7 +153,7 @@ nav {
     background-image: 
     linear-gradient(to left, rgb(31, 31, 31, 0.5), transparent), 
     linear-gradient(to right, rgb(31, 31, 31, 0.5), transparent), 
-    url('/src/assets/homepage1.jpg')
+    url('https://i.ibb.co/xh4JBt4/homepage1-min.webp')
     ;
     background-size: cover;
     background-position: center;
@@ -158,7 +163,7 @@ nav {
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        animation: slideLeft 1.2s ease-out;
+        animation: slideUp 1.2s ease-out;
         h1 {
             width: 60%;
             font-size: 60px;
@@ -420,6 +425,40 @@ nav {
     }
 }
 
+.renungan {
+    width: 100%;
+    height: auto;
+    header {
+        height: 40vh;
+        width: 100%;
+        background-image: 
+            linear-gradient(to right, rgb(30, 30, 30, 0.6), transparent), 
+            linear-gradient(to left, rgb(30, 30, 30, 0.6), transparent), 
+            url('https://i.ibb.co/hV4NN0v/bible-min.webp')
+            ;
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        h1 {
+            font-size: 60px;
+            color: $white;
+            animation: slideUp 0.8s ease-in;
+            span {
+                color: $white;
+                text-decoration: underline;
+                text-decoration-color: $yellow;
+            }
+        }
+    }
+    .container {
+        display: flex;
+        padding: 2% 10%;
+    }
+}
+
 .detailRenungan {
     width: 100%;
     min-height: 100vh;
@@ -432,6 +471,9 @@ nav {
         #content {
             white-space: pre-line;
             text-align: justify;
+        }
+        #verse {
+            font-style: italic;
         }
         span {
             margin: 12px 0;
@@ -498,6 +540,16 @@ footer {
         }
     }
 
+    .renungan {
+        header {
+            height: 25vh;
+            h1 {
+                padding-top: 10%;
+                font-size: 24px;
+            }
+        }
+    }
+
     .detailRenungan {
         padding-top: 8vh;
         .container {
@@ -539,8 +591,15 @@ footer {
                 flex-direction: column;
                 .dataSection {
                     table {
-                        .title, .author, .content, {
+                        font-size: 14px;
+                        .title, .author, .verse {
                             display: none;
+                        }
+                        #tdActions {
+                            button {
+                                font-size: 12px;
+                                padding: 2px;
+                            }
                         }
                     }
                 }

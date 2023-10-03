@@ -1,5 +1,4 @@
 import '../index.css'
-import logo from '../assets/logolafg.jpg'
 
 export default function Footer() {
     return (
@@ -7,7 +6,7 @@ export default function Footer() {
             <div className="container">
                 <p>Solafide Generation @ 2023 | All Rights Reserved</p>
                 <span>
-                    <a href=""><ion-icon name="logo-instagram"></ion-icon></a>
+                    <a href="https://instagram.com/lafgeneration/" target='blank'><ion-icon name="logo-instagram"></ion-icon></a>
                 </span>
             </div>
         </footer>

@@ -42,8 +42,8 @@ button {
 }
 #delBtn:hover {
   transform: none;
-  background-color: red;
-  color: white;
+  color: red;
+  font-weight: bold;
 }
 #delBtn #icon {
   font-size: 20px;
@@ -72,7 +72,7 @@ nav {
 }
 nav img {
   margin-left: 10%;
-  border-radius: 50%;
+  border-radius: 10px;
   width: 3.2%;
 }
 nav .hamburger {
@@ -128,13 +128,23 @@ nav .navLinks {
     opacity: 1;
   }
 }
+@keyframes slideUp {
+  0% {
+    transform: translateY(10%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .homepage {
   width: 100%;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: linear-gradient(to left, rgba(31, 31, 31, 0.5), transparent), linear-gradient(to right, rgba(31, 31, 31, 0.5), transparent), url("/src/assets/homepage1.jpg");
+  background-image: linear-gradient(to left, rgba(31, 31, 31, 0.5), transparent), linear-gradient(to right, rgba(31, 31, 31, 0.5), transparent), url("https://i.ibb.co/xh4JBt4/homepage1-min.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -144,7 +154,7 @@ nav .navLinks {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  animation: slideLeft 1.2s ease-out;
+  animation: slideUp 1.2s ease-out;
 }
 .homepage .container h1 {
   width: 60%;
@@ -395,6 +405,36 @@ nav .navLinks {
   margin-top: 8px;
 }
 
+.renungan {
+  width: 100%;
+  height: auto;
+}
+.renungan header {
+  height: 40vh;
+  width: 100%;
+  background-image: linear-gradient(to right, rgba(30, 30, 30, 0.6), transparent), linear-gradient(to left, rgba(30, 30, 30, 0.6), transparent), url("https://i.ibb.co/hV4NN0v/bible-min.webp");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.renungan header h1 {
+  font-size: 60px;
+  color: #fefefe;
+  animation: slideUp 0.8s ease-in;
+}
+.renungan header h1 span {
+  color: #fefefe;
+  text-decoration: underline;
+  text-decoration-color: #f4aa25;
+}
+.renungan .container {
+  display: flex;
+  padding: 2% 10%;
+}
+
 .detailRenungan {
   width: 100%;
   min-height: 100vh;
@@ -409,6 +449,9 @@ nav .navLinks {
 .detailRenungan .container #content {
   white-space: pre-line;
   text-align: justify;
+}
+.detailRenungan .container #verse {
+  font-style: italic;
 }
 .detailRenungan .container span {
   margin: 12px 0;
@@ -462,6 +505,13 @@ footer .container span a {
     width: 90%;
     font-size: 30px;
   }
+  .renungan header {
+    height: 25vh;
+  }
+  .renungan header h1 {
+    padding-top: 10%;
+    font-size: 24px;
+  }
   .detailRenungan {
     padding-top: 8vh;
   }
@@ -492,8 +542,15 @@ footer .container span a {
   .dashboard .container section {
     flex-direction: column;
   }
-  .dashboard .container section .dataSection table .title, .dashboard .container section .dataSection table .author, .dashboard .container section .dataSection table .content {
+  .dashboard .container section .dataSection table {
+    font-size: 14px;
+  }
+  .dashboard .container section .dataSection table .title, .dashboard .container section .dataSection table .author, .dashboard .container section .dataSection table .verse {
     display: none;
+  }
+  .dashboard .container section .dataSection table #tdActions button {
+    font-size: 12px;
+    padding: 2px;
   }
   .dashboard .container section form {
     padding-top: 10vh;
