@@ -15,7 +15,7 @@ export default function Router() {
                 <Route path="*" element={<NotFound />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/renungan" element={<Renungan />} />
-                <Route path="/renungan/:id" element={<DetailRenungan />} />
+                <Route path="/renungan/:id/:index" element={<DetailRenungan />} />
                 <Route element={<PrivateRoutes />}>
                     <Route path="/dashboard" element={<Dashboard />} />
                 </Route>

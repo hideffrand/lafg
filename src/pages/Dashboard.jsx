@@ -63,7 +63,6 @@ export default function Dashboard() {
         }
     }
     
-
     async function getRenungan() {
         let listData = [];
         const querySnapshot = await getDocs(collection(db, dbRenungan));

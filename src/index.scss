@@ -26,6 +26,7 @@ button {
     justify-content: center;
     padding: 4px 8px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .primaryButton {
@@ -37,9 +38,19 @@ button {
     font-weight: bold;
     font-size: 14px;
     transition: 0.3s;
-    cursor: pointer;
     &:hover {
         transform: translateY(4%);
+    }
+}
+
+.secondaryButton {
+    background-color: rgb(241, 241, 241);
+    border-radius: 2px;
+    padding: 4px 8px;
+    margin: 0 8px;
+    &:hover {
+        background-color: $yellow;
+        color: $white;
     }
 }
 
@@ -427,9 +438,9 @@ nav {
 
 .renungan {
     width: 100%;
-    height: auto;
+    height: 90vh;
     header {
-        height: 40vh;
+        height: 30vh;
         width: 100%;
         background-image: 
             linear-gradient(to right, rgb(30, 30, 30, 0.6), transparent), 
@@ -443,7 +454,7 @@ nav {
         align-items: center;
         justify-content: center;
         h1 {
-            font-size: 60px;
+            font-size: 40px;
             color: $white;
             animation: slideUp 0.8s ease-in;
             span {
@@ -455,7 +466,47 @@ nav {
     }
     .container {
         display: flex;
-        padding: 2% 10%;
+        padding: 5% 10%;
+        h1 {
+            padding-bottom: 12px;
+        }
+        .leftSection {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            .seriesContainer {
+                width: 100%;
+            }
+        }
+        .rightSection {
+            width: 50%;
+            #seriesChoose {
+                padding: 2% 10%;
+            }
+        }
+    }
+}
+
+.card {
+    background: linear-gradient(to right, rgb(240, 240, 240, 0.6), transparent);
+    padding: 20px;
+    border-radius: 4px;
+    border-left: 1px solid $grey;
+    width: 50%;
+    margin-bottom: 20px;
+    h4 {
+        font-size: 20px;
+    }
+    button {
+        margin: 12px 0;
+    }
+    .content {
+        text-align: justify;
+        padding-top: 8px;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+        display: -webkit-box;
     }
 }
 

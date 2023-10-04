@@ -20,6 +20,7 @@ button {
   justify-content: center;
   padding: 4px 8px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .primaryButton {
@@ -31,10 +32,20 @@ button {
   font-weight: bold;
   font-size: 14px;
   transition: 0.3s;
-  cursor: pointer;
 }
 .primaryButton:hover {
   transform: translateY(4%);
+}
+
+.secondaryButton {
+  background-color: rgb(241, 241, 241);
+  border-radius: 2px;
+  padding: 4px 8px;
+  margin: 0 8px;
+}
+.secondaryButton:hover {
+  background-color: #f4aa25;
+  color: #fefefe;
 }
 
 #delBtn {
@@ -407,10 +418,10 @@ nav .navLinks {
 
 .renungan {
   width: 100%;
-  height: auto;
+  height: 90vh;
 }
 .renungan header {
-  height: 40vh;
+  height: 30vh;
   width: 100%;
   background-image: linear-gradient(to right, rgba(30, 30, 30, 0.6), transparent), linear-gradient(to left, rgba(30, 30, 30, 0.6), transparent), url("https://i.ibb.co/hV4NN0v/bible-min.webp");
   background-size: 100%;
@@ -421,7 +432,7 @@ nav .navLinks {
   justify-content: center;
 }
 .renungan header h1 {
-  font-size: 60px;
+  font-size: 40px;
   color: #fefefe;
   animation: slideUp 0.8s ease-in;
 }
@@ -432,7 +443,47 @@ nav .navLinks {
 }
 .renungan .container {
   display: flex;
+  padding: 5% 10%;
+}
+.renungan .container h1 {
+  padding-bottom: 12px;
+}
+.renungan .container .leftSection {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+.renungan .container .leftSection .seriesContainer {
+  width: 100%;
+}
+.renungan .container .rightSection {
+  width: 50%;
+}
+.renungan .container .rightSection #seriesChoose {
   padding: 2% 10%;
+}
+
+.card {
+  background: linear-gradient(to right, rgba(240, 240, 240, 0.6), transparent);
+  padding: 20px;
+  border-radius: 4px;
+  border-left: 1px solid #7d7d7d;
+  width: 50%;
+  margin-bottom: 20px;
+}
+.card h4 {
+  font-size: 20px;
+}
+.card button {
+  margin: 12px 0;
+}
+.card .content {
+  text-align: justify;
+  padding-top: 8px;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  display: -webkit-box;
 }
 
 .detailRenungan {

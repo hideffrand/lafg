@@ -13,7 +13,7 @@ export default function DetailRenungan() {
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
     const dbRenungan = import.meta.env.VITE_REACT_RENUNGAN_DBNAME
-    const { id } = useParams()
+    const { id, index } = useParams()
     const [details, setDetails] = useState([])
 
     async function getDetailRenungan() {
@@ -29,6 +29,7 @@ export default function DetailRenungan() {
     }
     
     useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         getDetailRenungan()
     }, [])
 
@@ -58,6 +59,7 @@ export default function DetailRenungan() {
                             </div>
                         </div>
                     </span>
+                    {/* <button onClick={() => navigate(`/renungan/${}/${index + 1}`)}>Next</button> */}
                 </div>
             </div>
             <Footer />
