@@ -34,10 +34,7 @@ export default function DetailRenungan() {
 
     return (
         <>  
-            {/* <Helmet>
-                <title>COba</title>
-            </Helmet> */}
-            {/* <PageHelmet title={details.title} desc={'Renungan Pagi Hari'} type={'article'} setName={'Solafide Generation'} /> */}
+            <PageHelmet title={details.title} desc={'Renungan Pagi Hari'} type={'article'} setName={'Solafide Generation'} />
             {loading && <Loader />}
             <Navbar />
             <div className="detailRenungan">

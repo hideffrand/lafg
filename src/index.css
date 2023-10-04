@@ -34,7 +34,7 @@ button {
   border-radius: 10px;
   box-shadow: 3px 3px #f4aa25;
   font-weight: 600;
-  font-size: 12px;
+  font-size: 14px;
   transition: 0.3s;
 }
 .primaryButton:hover {
@@ -491,13 +491,13 @@ nav .navLinks {
 
 @keyframes skeleton {
   0% {
-    opacity: 0.2;
+    opacity: 0.4;
   }
   50% {
     opacity: 1;
   }
   100% {
-    opacity: 0.2;
+    opacity: 0.4;
   }
 }
 .cardSkeleton {

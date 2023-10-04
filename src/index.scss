@@ -45,7 +45,7 @@ button {
     border-radius: 10px;
     box-shadow: 3px 3px $yellow;
     font-weight: 600;
-    font-size: 12px;
+    font-size: 14px;
     transition: 0.3s;
     &:hover {
         transform: translateY(4%);
@@ -525,9 +525,9 @@ nav {
 }
 
 @keyframes skeleton {
-    0% {opacity: 0.2;}
+    0% {opacity: 0.4;}
     50% {opacity: 1;}
-    100% {opacity: 0.2;}
+    100% {opacity: 0.4;}
 }
 
 .cardSkeleton {
