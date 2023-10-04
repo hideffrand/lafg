@@ -4,7 +4,6 @@ import PageHelmet from "../SEO/PageHelmet"
 import { useEffect, useState } from "react"
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { Helmet } from 'react-helmet-async';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar'
 import Loader from '../components/Loader';

@@ -443,7 +443,7 @@ nav .navLinks {
 }
 .renungan .container {
   display: flex;
-  padding: 5% 10%;
+  padding: 3% 10%;
 }
 .renungan .container h1 {
   padding-bottom: 12px;
@@ -458,9 +458,66 @@ nav .navLinks {
 }
 .renungan .container .rightSection {
   width: 50%;
-}
-.renungan .container .rightSection #seriesChoose {
   padding: 2% 10%;
+}
+.renungan .container .rightSection .seriesChoose {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.renungan .container .rightSection .seriesChoose .buttons {
+  display: flex;
+}
+.renungan .container .rightSection ul {
+  height: 30vh;
+  overflow-y: scroll;
+  list-style: circle;
+}
+.renungan .container .rightSection ul p {
+  font-weight: bold;
+}
+.renungan .container .rightSection ul li {
+  padding: 0 16px;
+  cursor: pointer;
+}
+.renungan .container .rightSection ul li:hover {
+  text-decoration: underline;
+}
+
+@keyframes skeleton {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
+  }
+}
+.cardSkeleton {
+  width: 50%;
+  margin-bottom: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  border-left: 1px solid #7d7d7d;
+  background: linear-gradient(to right, rgba(240, 240, 240, 0.6), transparent);
+}
+.cardSkeleton h4, .cardSkeleton p, .cardSkeleton .content, .cardSkeleton button {
+  animation: skeleton 1.6s linear infinite;
+  width: 20%;
+  padding: 10px;
+  background-color: rgb(230, 230, 230);
+  border-radius: 4px;
+  margin: 4px 0;
+}
+.cardSkeleton p {
+  width: 90%;
+}
+.cardSkeleton .content {
+  margin: 10px 0;
+  width: 90%;
+  height: 30px;
 }
 
 .card {
@@ -552,16 +609,67 @@ footer .container span a {
   nav .navLinks {
     display: none;
   }
+  .sidebar .primaryButton {
+    font-size: 12px;
+  }
   .homepage .container h1 {
     width: 90%;
     font-size: 30px;
+  }
+  .renungan {
+    height: auto;
   }
   .renungan header {
     height: 25vh;
   }
   .renungan header h1 {
     padding-top: 10%;
-    font-size: 24px;
+    font-size: 32px;
+  }
+  .renungan .container {
+    flex-direction: column;
+    padding: 5% 5%;
+  }
+  .renungan .container h1 {
+    font-size: 16px;
+  }
+  .renungan .container .leftSection, .renungan .container .rightSection {
+    width: 100%;
+  }
+  .renungan .container .rightSection {
+    padding: 0;
+  }
+  .renungan .container .rightSection .seriesChoose {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+  }
+  .renungan .container .rightSection .seriesChoose .buttons {
+    justify-content: space-between;
+  }
+  .renungan .container .rightSection .seriesChoose .buttons button {
+    font-size: 14px;
+    padding: 2px 6px;
+  }
+  .renungan .container .rightSection ul p {
+    font-size: 14px;
+  }
+  .renungan .container .rightSection ul li {
+    font-size: 14px;
+  }
+  .card {
+    width: 90%;
+    padding: 20px 10px;
+  }
+  .card h4 {
+    font-size: 15px;
+  }
+  .card p {
+    font-size: 12px;
+  }
+  .card button {
+    font-size: 12px;
   }
   .detailRenungan {
     padding-top: 8vh;
@@ -620,6 +728,6 @@ footer .container span a {
   }
   footer .container p {
     font-size: 12px;
-    width: 50%;
+    width: 70%;
   }
 }/*# sourceMappingURL=index.css.map */
