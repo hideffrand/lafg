@@ -206,13 +206,9 @@ export default function Dashboard() {
             <>
                 <div className="popup" style={{ display: showPopup ? 'flex' : 'none' }}>
                     <div className="container">
-                        <section>
-                            <span></span>
-                            <div className="icon">
-                                <ion-icon id="icons" name="checkmark-outline"></ion-icon>
-                            </div>
-                            <p onClick={() => setShowPopup(false)}>x</p>
-                        </section>
+                        <div className="icon">
+                            <ion-icon id="icons" name="checkmark-outline"></ion-icon>
+                        </div>
                         <h1>{ propPopup }</h1>
                     </div>
                 </div>
@@ -226,7 +222,7 @@ export default function Dashboard() {
         setShowPopup(true)
         setTimeout(() => {
             setShowPopup(false)
-        }, 1000);
+        }, 800);
     }
 
     function handleExit() {
@@ -249,6 +245,7 @@ export default function Dashboard() {
                     <button className="primaryButton" onClick={() => setChangeSection('addJadwal')}>Jadwal</button>
                     <button className="primaryButton" onClick={() => setChangeSection('addRenungan')}>Renungan</button>
                     <button className="primaryButton" onClick={() => handleExit()}>Exit</button>
+                    {/* <button onClick={() => handlePopup('test')}>test</button> */}
                 </section>
             </div>
             <div className="dashboard">

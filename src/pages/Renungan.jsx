@@ -76,6 +76,7 @@ export default function Renungan() {
                                 <h4>{listRenungan[randomIndex]?.data.title}</h4>
                                 <p>Oleh: {listRenungan[randomIndex]?.data.author}</p>
                                 <br />
+                                <p>{listRenungan[randomIndex]?.data.verse}</p>
                                 <p className='content'>{listRenungan[randomIndex]?.data.content}</p>
                                 <button className='primaryButton' onClick={() => navigate(`/renungan/${listRenungan[randomIndex].docId}`)}>Baca</button>
                             </div>
