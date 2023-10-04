@@ -26,11 +26,11 @@ button {
 .primaryButton {
   padding: 4px 16px;
   background-color: #fefefe;
-  border: 2px solid #070606;
+  border: 1px solid #070606;
   border-radius: 10px;
   box-shadow: 3px 3px #f4aa25;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 12px;
   transition: 0.3s;
 }
 .primaryButton:hover {

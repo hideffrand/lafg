@@ -35,11 +35,11 @@ button {
 .primaryButton {
     padding: 4px 16px;
     background-color: $white;
-    border: 2px solid $black;
+    border: 1px solid $black;
     border-radius: 10px;
     box-shadow: 3px 3px $yellow;
-    font-weight: bold;
-    font-size: 14px;
+    font-weight: 400;
+    font-size: 12px;
     transition: 0.3s;
     &:hover {
         transform: translateY(4%);

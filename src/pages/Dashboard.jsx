@@ -176,8 +176,8 @@ export default function Dashboard() {
                                         pushVerse: renungan.data.verse,
                                         pushContent: renungan.data.content,
                                     })
-                                }}><ion-icon name="create-outline"></ion-icon>Edit</button>
-                                <button id="delBtn" onClick={() => delRenungan(renungan.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon>Delete</button>
+                                }}><ion-icon name="create-outline"></ion-icon></button>
+                                <button id="delBtn" onClick={() => delRenungan(renungan.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon></button>
                             </td>
                         </tr>
                     ))}
