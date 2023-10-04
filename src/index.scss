@@ -15,7 +15,13 @@ $grey: #7d7d7d;
     // &:hover {
     //     border: 1px solid red;
     // }
+    text-size-adjust: none;
+    -webkit-text-size-adjust: none;
+    -moz-text-size-adjust: none;
+    -ms-text-size-adjust: none;
 }
+
+
 
 textarea {
     resize: none;
