@@ -1,7 +1,7 @@
 import "/src/index.css";
 import { v4 as uuid } from 'uuid';
 import { useEffect, useRef, useState } from "react";
-import { collection, doc, setDoc, getDocs, deleteDoc } from "firebase/firestore";
+import { collection, doc, setDoc, getDocs, deleteDoc, limit } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
 import { db } from "/src/config/firebase.js";
 import Loader from "../components/Loader";
@@ -87,18 +87,6 @@ export default function Dashboard() {
         }
     }
 
-    function handleEditRenungan(props) {
-        setFormTitle(`Edit Renungan ${props.id}`)
-        setUpdateId(props.id)
-        setTitle(props.pushTitle)
-        setAuthor(props.pushAuthor)
-        setPostDate(props.pushPostedAt)
-        setEditDate(new Date())
-        setVerse(props.pushVerse)
-        setContent(props.pushContent)
-        setSeries(props.pushSeries)
-    }
-
     async function handleSubmitTodo(e) {
         e.preventDefault();
         try {
@@ -167,15 +155,15 @@ export default function Dashboard() {
                             <td id="tdActions">
                                 <button id="editBtn" onClick={() => {
                                     setShowForm(!showForm)
-                                    handleEditRenungan({
-                                        id: renungan.docId,
-                                        pushTitle: renungan.data.title,
-                                        pushSeries: renungan.data.series,
-                                        pushPostedAt: renungan.data.postedAt,
-                                        pushAuthor: renungan.data.author,
-                                        pushVerse: renungan.data.verse,
-                                        pushContent: renungan.data.content,
-                                    })
+                                    setFormTitle(`Edit Renungan ${renungan.data.id}`)
+                                    setUpdateId(renungan.data.id)
+                                    setTitle(renungan.data.title)
+                                    setAuthor(renungan.data.author)
+                                    setPostDate(renungan.data.postedAt)
+                                    setEditDate(new Date())
+                                    setVerse(renungan.data.verse)
+                                    setContent(renungan.data.content)
+                                    setSeries(renungan.data.series)
                                 }}><ion-icon name="create-outline"></ion-icon></button>
                                 <button id="delBtn" onClick={() => delRenungan(renungan.docId)}><ion-icon id="icon" name="trash-outline"></ion-icon></button>
                             </td>

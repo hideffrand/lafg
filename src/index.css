@@ -587,6 +587,11 @@ footer .container {
   justify-content: space-between;
   padding: 0 10%;
 }
+footer .container span {
+  background-color: #fefefe;
+  border-radius: 10px;
+  padding: 8px;
+}
 footer .container span a {
   display: flex;
   align-items: center;

@@ -616,6 +616,9 @@ footer {
         justify-content: space-between;
         padding: 0 10%;
         span {
+            background-color: $white;
+            border-radius: 10px;
+            padding: 8px;
             a {
                 display: flex;
                 align-items: center;
