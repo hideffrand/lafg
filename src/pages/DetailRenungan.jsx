@@ -40,37 +40,32 @@ export default function DetailRenungan() {
     }, [])
 
     return (
-        <>  
-            <PageHelmet
-                title={metaProps.title}
-                author={metaProps.author}
-                desc={metaProps.desc}
-                url={metaProps.url}
-            />
-            {loading && <Loader />}
-            <Navbar />
-            <div className="detailRenungan">
-                <div className="container">
-                    <h1>{details.title}</h1>
-                    <p id='verse'>{details.verse}</p>
-                    <br />
-                    <p id='content'>{details.content}</p>
-                    <br />
-                    <p>{details.author}</p>
-                    <p>{details.postedAt}</p>
-                    <span>
-                        <span></span>
-                        <div className="buttons">
-                            <button><ion-icon name="heart-outline"></ion-icon></button>
-                            <div className="shareContainer">
-                                <button></button>
-                            </div>
-                        </div>
-                    </span>
-                    {/* <button onClick={() => navigate(`/renungan/${}/${index + 1}`)}>Next</button> */}
-                </div>
-            </div>
-            <Footer />
-        </>
+      <>  
+        <PageHelmet
+            title={metaProps.title}
+            author={metaProps.author}
+            desc={metaProps.desc}
+            url={metaProps.url}
+        />
+        {loading && <Loader />}
+        <Navbar />
+        <div className="detailRenungan">
+          <div className="container">
+            <h1>{details.title}</h1>
+            <p id='verse'>{details.verse}</p>
+            <br />
+            <p id='content'>{details.content}</p>
+            <br />
+            <p>{details.author}</p>
+            <p>{details.postedAt}</p>
+            <span>
+              <button className='primaryButton' onClick={() => history.back()}>Back</button>
+            </span>
+            <br />
+            <h2>Lainnya</h2>
+          </div>
+        </div>
+        <Footer />
+      </>
     )
 }

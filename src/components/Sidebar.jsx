@@ -7,10 +7,10 @@ export default function Sidebar() {
     return (
         <div className="sidebar">
             <div className="container">
-                <p className="primaryButton" onClick={() => navigate('/')}>Home</p>
-                <p className="primaryButton" onClick={() => navigate('/#news')}>News</p>
-                <p className="primaryButton">Gallery</p>
-                <p className="primaryButton" onClick={() => navigate('/renungan')}>Renungan</p>
+                <p onClick={() => navigate('/')}>Home</p>
+                <p onClick={() => navigate('/#news')}>News</p>
+                <p>Gallery</p>
+                <p onClick={() => navigate('/renungan')}>Renungan</p>
             </div>
         </div>
     )

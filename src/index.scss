@@ -20,7 +20,67 @@ $grey: #7d7d7d;
     -moz-text-size-adjust: none;
     -ms-text-size-adjust: none;
 }
+@keyframes mltShdSpin {
+    0% {
+      box-shadow: 0 -0.83em 0 -0.4em,
+      0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    5%,
+    95% {
+      box-shadow: 0 -0.83em 0 -0.4em, 
+      0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 
+      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+    10%,
+    59% {
+      box-shadow: 0 -0.83em 0 -0.4em, 
+      -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, 
+      -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
+    }
+    20% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
+       -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, 
+       -0.749em -0.34em 0 -0.477em;
+    }
+    38% {
+      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
+       -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, 
+       -0.82em -0.09em 0 -0.477em;
+    }
+    100% {
+      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 
+      0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
+    }
+}
+  
+@keyframes round {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
 
+.loaderContainer {
+    width: 100%;
+    height: 100vh;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: 2;
+    .loader {
+        color: $yellow;
+        font-size: 45px;
+        text-indent: -9999em;
+        overflow: hidden;
+        width: 1em;
+        height: 1em;
+        border-radius: 50%;
+        position: relative;
+        transform: translateZ(0);
+        animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+    }
+}
 
 
 textarea {
@@ -28,7 +88,6 @@ textarea {
 }
 
 button {
-    background-color: $white;
     border: none;
     display: flex;
     align-items: center;
@@ -101,11 +160,14 @@ nav {
         width: 3.2%;
     }
     .hamburger {
-        padding-right: 10%;
+        margin-right: 10%;
         display: none;
+        background-color: $white;
+        padding: 4px;
+        border-radius: 10px;
         #icon {
-            font-size: 36px;
-            color: $white;
+            font-size: 28px;
+            color: $black;
         }
     }
     .navLinks {
@@ -113,6 +175,14 @@ nav {
         align-items: center;
         gap: 24px;
         padding-right: 10%;
+        button, a {
+            background-color: transparent;
+            color: $white;
+            font-size: 16px;
+            &:hover  {
+                text-decoration: underline;
+            }
+        }
     }
 }
 
@@ -141,10 +211,15 @@ nav {
         width: 100%;
         height: 8vh;
         display: flex;
-        justify-content: center;
         align-items: center;
-        gap: 12px;
+        justify-content: space-around;
         background-color: $white;
+        p {
+            font-size: 14px;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
     }
 }
 
@@ -202,68 +277,66 @@ nav {
     }
 }
 
-
-@keyframes mltShdSpin {
-    0% {
-      box-shadow: 0 -0.83em 0 -0.4em,
-      0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em,
-      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-    }
-    5%,
-    95% {
-      box-shadow: 0 -0.83em 0 -0.4em, 
-      0 -0.83em 0 -0.42em, 0 -0.83em 0 -0.44em, 
-      0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-    }
-    10%,
-    59% {
-      box-shadow: 0 -0.83em 0 -0.4em, 
-      -0.087em -0.825em 0 -0.42em, -0.173em -0.812em 0 -0.44em, 
-      -0.256em -0.789em 0 -0.46em, -0.297em -0.775em 0 -0.477em;
-    }
-    20% {
-      box-shadow: 0 -0.83em 0 -0.4em, -0.338em -0.758em 0 -0.42em,
-       -0.555em -0.617em 0 -0.44em, -0.671em -0.488em 0 -0.46em, 
-       -0.749em -0.34em 0 -0.477em;
-    }
-    38% {
-      box-shadow: 0 -0.83em 0 -0.4em, -0.377em -0.74em 0 -0.42em,
-       -0.645em -0.522em 0 -0.44em, -0.775em -0.297em 0 -0.46em, 
-       -0.82em -0.09em 0 -0.477em;
-    }
-    100% {
-      box-shadow: 0 -0.83em 0 -0.4em, 0 -0.83em 0 -0.42em, 
-      0 -0.83em 0 -0.44em, 0 -0.83em 0 -0.46em, 0 -0.83em 0 -0.477em;
-    }
-}
-  
-@keyframes round {
-    0% { transform: rotate(0deg) }
-    100% { transform: rotate(360deg) }
-}
-
-.loaderContainer {
+.news {
     width: 100%;
-    height: 100vh;
-    background-color: transparent;
+    min-height: 70vh;
+    max-height: auto;
     display: flex;
     align-items: center;
-    justify-content: center;
-    position: absolute;
-    z-index: 2;
-    .loader {
-        color: $yellow;
-        font-size: 45px;
-        text-indent: -9999em;
-        overflow: hidden;
-        width: 1em;
-        height: 1em;
-        border-radius: 50%;
-        position: relative;
-        transform: translateZ(0);
-        animation: mltShdSpin 1.7s infinite ease, round 1.7s infinite ease;
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 5% 10%;
+        .text {
+            padding: 20px;
+            border-radius: 4px;
+            background: linear-gradient(to right, rgb(230, 230, 230, 0.4), transparent);
+            border-left: 1px solid $grey;
+            width: 30%;
+            height: 30vh;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: center;
+        }
+        #text2 {
+            background: linear-gradient(to left, rgb(240, 240, 240, 0.4), transparent);
+            border-right: 1px solid $grey;
+            border-left: none;
+        }
+        .poster {
+            width: 40%;
+            overflow: hidden;
+            animation: slideUp 0.3s ease-in;
+            img {
+                width: 100%;
+                transition: 0.4s;
+                &:hover {
+                    transform: scale(1.02);
+                    transition: 0.4s;
+                }
+            }
+        }
     }
 }
+
+.highlight {
+    width: 100%;
+    height: 100vh;
+    h1 {
+        padding-left: 10%;
+    }
+}
+
+.maps {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 @keyframes popup {
     0% {transform: scale(0.8);}
@@ -556,9 +629,9 @@ nav {
 }
 
 .card {
-    background: linear-gradient(to right, rgb(240, 240, 240, 0.6), transparent);
     padding: 20px;
     border-radius: 4px;
+    background: linear-gradient(to right, rgb(240, 240, 240, 0.6), transparent);
     border-left: 1px solid $grey;
     width: 50%;
     margin-bottom: 20px;
@@ -643,19 +716,36 @@ footer {
 
     nav {
         img {
-            width: 10%;
+            width: 40px;
         }
         .hamburger {
-            display: block;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .navLinks {
             display: none;
         }
     }
 
-    .sidebar {
-        .primaryButton {
-            font-size: 12px;
+    .news {
+        .container {
+            width: 100%;
+            flex-direction: column;
+            padding: 10% 5%;
+            gap: 24px;
+            .text {
+                padding: 12px;
+                width: 90%;
+                height: auto;
+                font-size: 12px;
+                button {
+                    font-size: 12px;
+                }
+            }
+            .poster {
+                width: 100%;
+            }
         }
     }
 
