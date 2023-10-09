@@ -37,7 +37,7 @@ export default function Homepage() {
                 </div>
             </div>
             <div className="highlight">
-                <h1>Hihglihts</h1>
+                <h1>Highlihts</h1>
             </div>
             <GoogleMaps />
         </>

@@ -294,7 +294,7 @@ nav {
             background: linear-gradient(to right, rgb(230, 230, 230, 0.4), transparent);
             border-left: 1px solid $grey;
             width: 30%;
-            height: 30vh;
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: start;
@@ -712,7 +712,7 @@ footer {
     gap: 10vh;
 }
 
-@media only screen and (max-width: 678px) {
+@media only screen and (max-width: 769px) {
 
     nav {
         img {
